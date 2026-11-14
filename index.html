@@ -638,7 +638,7 @@ function viewMind() {
   <button class="btn b-orange" id="mHl">🖍 하이라이트·📝 메모<small>칠한 곳 ${hlCount("m")}개 모아 보기·듣기</small></button>
   <button class="btn b-purple" id="mAll">🎧 마인드맵 전체 듣기<small>1절부터 가지를 차례로 읽어 줘요</small></button>
   <section class="card">${MM.map((s, i) => `<button class="sec" data-n="${s.n}"><span class="n" style="background:${SCOL[i % SCOL.length]};color:#fff">${s.n}</span><b>${esc(s.t)}<br><span class="sm">큰 가지 ${s.c.length}개 · 요점 ${mmCount(s)}개</span></b><span class="sm">›</span></button>`).join("")}</section>
-  <p class="sm" style="text-align:center">원본: halt 이후 변동성 스캘핑 비급서 마인드맵 PDF (2026년 10월 12일판)</p>`;
+  <p class="sm" style="text-align:center">원본: halt 이후 변동성 스캘핑 비급서 마인드맵 PDF</p>`;
   wireHead();
   $("#view").querySelectorAll("[data-n]").forEach(b => b.onclick = () => { mmOpen = new Set(); mmSec = +b.dataset.n; go("msec"); });
   $("#mAll").onclick = () => TTS.play(MM.flatMap(s => { const it = [{ text: `제${s.n}절, ${s.t}.`, label: `🧠 제${s.n}절 ${s.t}`, pause: 600 }];
@@ -725,7 +725,7 @@ function viewMSec(arg = {}) {
   $("#mOpen")?.addEventListener("click", () => { mmOpen = new Set(all()); viewMSec(); });
   $("#mClose")?.addEventListener("click", () => { mmOpen = new Set(); viewMSec(); });
   $("#mListen")?.addEventListener("click", () => { if (mmOpen.size < all().length) { mmOpen = new Set(all()); viewMSec(); } setTimeout(() => $("#mListen") && TTS.play(items(null)), 50); });
-  const im = V.querySelector(".mimg img"), toRoot = () => { const w = V.querySelector(".mimg"); if (w && [8, 9, 10, 11, 12, 13, 14, 15, 16].includes(s.n)) w.scrollLeft = w.scrollWidth; };
+  const im = V.querySelector(".mimg img"), toRoot = () => { const w = V.querySelector(".mimg"); if (w && [7, 8, 9, 10, 11, 12].includes(s.n)) w.scrollLeft = w.scrollWidth; };
   if (im) im.complete ? toRoot() : im.addEventListener("load", toRoot);
   $("#zIn")?.addEventListener("click", () => { mmZoom = Math.min(4, mmZoom + 0.5); V.querySelector(".mimg img").style.width = mmZoom * 100 + "%"; toRoot(); });
   $("#zOut")?.addEventListener("click", () => { mmZoom = Math.max(1, mmZoom - 0.5); V.querySelector(".mimg img").style.width = mmZoom * 100 + "%"; toRoot(); });
